@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'easymotion/vim-easymotion'
 
 
+
 " File System
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dsimidzija/vim-nerdtree-ignore'
@@ -32,13 +33,16 @@ Plug 'ternjs/tern_for_vim'
 Plug 'mxw/vim-jsx'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'css', 'typescript']  }
 " Plug 'pangloss/vim-javascript'
-
 " Plug 'jelera/vim-javascript-syntax'
+
 
 " Theme
 Plug 'crusoexia/vim-monokai'
 Plug 'vim-airline/vim-airline'
 
+" Git
+" Plug 'tpope/vim-git'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 call plug#end()
 
@@ -92,7 +96,7 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|next)$|node_modules'
 
 
 " Coding
-set guifont=Roboto\ Mono\ Light\ Nerd\ Font\ Complete\ Mono:h14
+" set guifont=Roboto\ Mono\ Light\ Nerd\ Font\ Complete\ Mono:h14
 set encoding=utf8
 
 highlight link SyntasticError WildMenu
@@ -158,7 +162,12 @@ let g:jsx_ext_required = 0
 " move between split pane by Backspace, Tab
 nnoremap <Tab> <c-w>w
 nnoremap <bs> <c-w>W
+" jj as esc
 imap jj <Esc>
+" Open CtrlP with CMD+P (vscode like)
+map <D-P> <C-P>
+map <D-p> <C-P>
+
 
 " use tab 4 spaces
 set tabstop=2       " The width of a TAB is set to 4.
