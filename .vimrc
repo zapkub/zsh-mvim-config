@@ -3,37 +3,52 @@ call plug#begin('~/.vim/plugged')
 " Accesibility
 Plug 'easymotion/vim-easymotion'
 
+
 " File System
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dsimidzija/vim-nerdtree-ignore'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'voronkovich/ctrlp-nerdtree.vim'
+" Plug 'ryanoasis/vim-devicons'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Coding
 Plug 'tpope/vim-commentary'
+Plug 'vim-syntastic/syntastic'
+Plug 'jiangmiao/auto-pairs'
 
 "" Typescript
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Quramy/vim-js-pretty-template' 
-Plug 'jason0x43/vim-js-indent'
 
 "" Javascript
+Plug 'jason0x43/vim-js-indent'
 Plug 'othree/yajs.vim'
-Plug 'pangloss/vim-javascript'
+Plug 'chemzqm/vim-jsx-improve'
+Plug 'ternjs/tern_for_vim'
+Plug 'mxw/vim-jsx'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'css', 'typescript']  }
+" Plug 'pangloss/vim-javascript'
+
+" Plug 'jelera/vim-javascript-syntax'
 
 " Theme
 Plug 'crusoexia/vim-monokai'
 Plug 'vim-airline/vim-airline'
+
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
  
 " Setup nerdtree and CtrlP =======
+  
 map <C-n> :NERDTreeToggle<CR>
+let g:airline_powerline_fonts = 1
 let g:ctrlp_show_hidden = 1
-"
+
 " Enable synchornize nerdtree folder with current folder
 " Check if NERDTree is open or active
 function! IsNERDTreeOpen()
@@ -76,8 +91,31 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|next)$|node_modules'
 " END nerdtree and CtrlP
 
 
+" Coding
+set guifont=Roboto\ Mono\ Light\ Nerd\ Font\ Complete\ Mono:h14
+set encoding=utf8
+
+highlight link SyntasticError WildMenu
+highlight link SyntasticWarning WildMenu
+
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = '/usr/local/bin/eslint'
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+highlight SyntasticError guibg=#2f0000
+highlight SyntasticWarning guibg=#ffffff
 
 
+
+let g:prettier#config#trailing_comma = 'none'
+let g:prettier#config#semi = 'false'
+let g:prettier#config#bracket_spacing = 'true'
 
 " START Omni completetion setup
 " setting omni completetion for accept on type
@@ -90,6 +128,8 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
             \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
 let g:tsuquyomi_completion_detail = 1
+
+" Highlight stateless jsx
 
 set completeopt=longest,menuone
 
@@ -113,9 +153,12 @@ set number
 syntax on
 colorscheme monokai
 
+let g:jsx_ext_required = 0
+
 " move between split pane by Backspace, Tab
 nnoremap <Tab> <c-w>w
 nnoremap <bs> <c-w>W
+imap jj <Esc>
 
 " use tab 4 spaces
 set tabstop=2       " The width of a TAB is set to 4.

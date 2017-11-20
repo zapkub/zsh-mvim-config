@@ -1,6 +1,11 @@
 # ZSH and VIM setup
 
 ## Usage
+- Install `eslint`
+```
+  npm install eslint-config-standard --global
+  npm install --save-dev eslint-config-standard eslint-plugin-standard eslint-plugin-promise eslint-plugin-import eslint-plugin-node --global
+```
 - Install oh-my-zsh and mvim
   - https://github.com/robbyrussell/oh-my-zsh
   - mvim
